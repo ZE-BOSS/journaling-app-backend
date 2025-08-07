@@ -11,6 +11,9 @@
     "lint": "eslint . --ext .ts",
     "test": "jest"
   },
+  "engines": {
+    "node": "20.x"
+  },
   "dependencies": {
     "@nestjs/common": "^11.1.5",
     "@nestjs/config": "^4.0.2",
@@ -49,9 +52,6 @@
     "trading",
     "analytics"
   ],
-  "resolutions": {
-    "file-type": "18.5.0"
-  },
   "author": "Your Name",
   "license": "MIT"
 }
