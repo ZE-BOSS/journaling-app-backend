@@ -1,5 +1,5 @@
-import { JournalEntry } from 'src/journals/journal-entry.entity';
-import { Strategy } from 'src/strategies/strategy.entity';
+import { JournalEntry } from '../journals/journal-entry.entity';
+import { Strategy } from '../strategies/strategy.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity('users')
