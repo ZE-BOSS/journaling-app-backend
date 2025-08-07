@@ -13,12 +13,12 @@ import { ConfigModule } from '@nestjs/config';
       isGlobal: true,
     }),
     TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'turntable.proxy.rlwy.net',
-      port: 22275,
-      username: 'postgres',
-      password: 'HMyNlTdgXJXrxzzzWuKIEKitaEpgveAj',
-      database: 'railway',
+      type: process.env.DATABASE_TYPE as any,
+      host: process.env.DATABASE_HOST,
+      port: Number(process.env.DATABASE_PORT) || 5432,
+      username: process.env.DATABASE_USERNAME,
+      password: process.env.DATABASE_PASSWORD,
+      database: process.env.DATABASE_NAME,
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true, // for dev only
       ssl: true, // Important for Railway, they enforce SSL
