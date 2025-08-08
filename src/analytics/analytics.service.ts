@@ -19,7 +19,8 @@ export class AnalyticsService {
   ) {}
 
   async getSummary(userId: string): Promise<SummaryDto> {
-    const totalTrades = await this.journalEntryRepository.count({ where: { user: { id: userId } } });
+    const entries = await this.journalEntryRepository.find({ where: { user: { id: userId } } });
+    const totalTrades = entries.length;
     const totalWins = await this.journalEntryRepository
       .createQueryBuilder('journal')
       .select('SUM(journal.profit)', 'totalProfit')
@@ -31,7 +32,7 @@ export class AnalyticsService {
       .where('journal.user.id = :userId', { userId })
       .andWhere('journal.profit < 0')
       .getRawOne();
-    const winRate = totalTrades > 0 ? (totalWins.totalProfit / totalTrades) * 100 : 0;
+    const winRate = entries.length > 0 ? (entries.filter(entry => entry.profit > 0).length / entries.length) * 100 : 0;
     const bestStrategy = await this.journalEntryRepository
       .createQueryBuilder('journal')
       .select('journal.strategyId', 'strategyId')
